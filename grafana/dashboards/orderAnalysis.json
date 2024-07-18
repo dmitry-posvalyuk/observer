@@ -1,0 +1,545 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": ["sum"],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT *\r\nFROM  (\r\n   SELECT\r\n   \"orderNumber\",\r\n   \"type\",\r\n   \"createdAt\", \r\n   lead(\"createdAt\") OVER (ORDER BY \"createdAt\") - \"createdAt\" AS delta\r\n   FROM \"orderEvents\"\r\n   ) t\r\nWHERE \"orderNumber\" = '$selectedOrderNumber'\r\nORDER  BY \"createdAt\"",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Delays",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P7BDC25D1694EF984"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colWidth": 0.9,
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "dataset": "db",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P7BDC25D1694EF984"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT createdAt,\r\n#DATE_ADD(createdAt, INTERVAL 15 second) as nextEvent,\r\n#orderNumber,\r\ntype as 'confirmed'\r\nFROM events\r\nWHERE orderNumber = \"$selectedOrderNumber\" \r\nAND type = 'confirmed'\r\n#ORDER BY createdAt\r\n\r\n# DATE_ADD(createdAt, INTERVAL 15 second) as nextEvent",
+          "refId": "confirmed",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "dataset": "db",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P7BDC25D1694EF984"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT createdAt,\r\ntype as 'payment pending'\r\nFROM events\r\nWHERE orderNumber = \"$selectedOrderNumber\" \r\nAND type = 'payment-pending'",
+          "refId": "payment-pending",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "dataset": "db",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P7BDC25D1694EF984"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT createdAt,\r\ntype as 'dispatched'\r\nFROM events\r\nWHERE orderNumber = \"$selectedOrderNumber\" \r\nAND type = 'dispatched'",
+          "refId": "dispatched",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "dataset": "db",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P7BDC25D1694EF984"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT createdAt,\r\ntype as 'collected'\r\nFROM events\r\nWHERE orderNumber = \"$selectedOrderNumber\" \r\nAND type = 'collected'",
+          "refId": "collected",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "dataset": "db",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P7BDC25D1694EF984"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT createdAt,\r\ntype as 'returned'\r\nFROM events\r\nWHERE orderNumber = \"$selectedOrderNumber\" \r\nAND type = 'returned'",
+          "refId": "returned",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Order timeline",
+      "transformations": [],
+      "type": "status-history"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "order number"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": false,
+                    "title": "",
+                    "url": "/d/c1c6411b-d346-4fba-8e8e-c7e9864a71bc/order-analysis?orgId=1&from=now-30d&to=now&var-selectedOrderNumber=${__value.text}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 30,
+        "w": 12,
+        "x": 0,
+        "y": 13
+      },
+      "id": 4,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": ["sum"],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "dataset": "db",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P7BDC25D1694EF984"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT number as \"order number\", \"createdAt\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\")",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Order list",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "P7BDC25D1694EF984"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "id": 5,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": ["sum"],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "dataset": "db",
+          "datasource": {
+            "type": "mysql",
+            "uid": "P7BDC25D1694EF984"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "\r\n\r\nSELECT \r\n  type, \r\n  createdAt,\r\n  SEC_TO_TIME(TIMESTAMPDIFF(SECOND, createdAt, LEAD(createdAt) OVER (ORDER BY orderNumber))) AS 'time to open'\r\nFROM \r\n  (SELECT \r\n  type,\r\n  createdAt,\r\n  orderNumber\r\n  FROM events\r\n  WHERE type IN('email-send', 'email-open') and orderNumber = \"$selectedOrderNumber\")\r\n  as events\r\nWHERE orderNumber = \"$selectedOrderNumber\"",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Email events",
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "GB0486285318",
+          "value": "GB0486285318"
+        },
+        "definition": "SELECT number FROM orders",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Order Number",
+        "multi": false,
+        "name": "selectedOrderNumber",
+        "options": [],
+        "query": "SELECT number FROM orders",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Order analysis",
+  "uid": "c1c6411b-d346-4fba-8e8e-c7e9864a71bc",
+  "version": 1,
+  "weekStart": ""
+}
