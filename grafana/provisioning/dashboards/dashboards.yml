@@ -1,10 +1,8 @@
 apiVersion: 1
 
 providers:
-  - name: 'default'
-    orgId: 1
-    folder: ''
-    folderUid: ''
+  - name: dashboards
     type: file
     options:
       path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: true

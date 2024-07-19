@@ -1,0 +1,762 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "/^count$/",
+          "values": true
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  name,\r\n  COUNT(\"eventTypes\".name)\r\nFROM \"eventTypes\"\r\nJOIN orders ON orders.status = \"eventTypes\".name\r\nWHERE $__timeFilter(\"createdAt\")\r\nGROUP BY \"eventTypes\".name",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cdnnotbkv9b7ka"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  'confirmed',\r\n  COUNT(number)\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\")",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Order status counters",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 27,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  $__timeGroupAlias(\"createdAt\", '1d'),\r\n  COUNT(number) as \"refunded\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status = 'refundSuccess'\r\nGROUP BY time\r\nORDER BY time",
+          "refId": "refunded",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  $__timeGroupAlias(\"createdAt\", '1d'),\r\n  COUNT(number) as \"collected\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status = 'collected'\r\nGROUP BY time\r\nORDER BY time\r\n",
+          "refId": "collected",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  $__timeGroupAlias(\"createdAt\", '1d'),\r\n  COUNT(number) as \"failed\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status in (\r\n  'cancelFailed',\r\n  'cancelledNoInventory',\r\n  'paymentAuthFailed',\r\n  'paymentCaptureFailed',\r\n  'paymentCanceled',\r\n  'unfulfilled',\r\n  'dispatchedParcelMismatch',\r\n  'canceledLostInTransit',\r\n  'refundFailed'\r\n)\r\nGROUP BY time\r\nORDER BY time\r\n",
+          "refId": "failed",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "cdnnotbkv9b7ka"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  $__timeGroupAlias(\"createdAt\", '1d'),\r\n  COUNT(number) as \"confirmed\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\")\r\nGROUP BY time\r\nORDER BY time\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Order stats",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "links": [
+            {
+              "title": "${__data.fields[\"number\"]}",
+              "url": "/d/d29bc11c-75de-4ee8-ac1e-d0214cae2072/order-review?var-selectedOrderNumber=${__data.fields[\"number\"]}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "number"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 135
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 107
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "customerRef"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 368
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "customerId"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 102
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "createdAt"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 176
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 16,
+        "x": 0,
+        "y": 24
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": ["sum"],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "number"
+          }
+        ]
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n  number,\r\n  status,\r\n  \"customerRef\",\r\n  \"customerId\",\r\n  \"createdAt\",\r\n  \"completedAt\"\r\nFROM orders \r\nWHERE $__timeFilter(\"createdAt\") \r\nORDER BY \"createdAt\"\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "orders"
+        }
+      ],
+      "title": "Orders activity",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 8,
+        "x": 16,
+        "y": 24
+      },
+      "id": 4,
+      "options": {
+        "displayLabels": ["percent", "value"],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": ["value"]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/.*/",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\nCOUNT(*) as \"refunded\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status = 'refundSuccess'",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\nCOUNT(*) as \"collected\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status = 'collected'\r\n",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\nCOUNT(*) as \"failed\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status in (\r\n  'cancelFailed',\r\n  'cancelledNoInventory',\r\n  'paymentAuthFailed',\r\n  'paymentCaptureFailed',\r\n  'paymentCanceled',\r\n  'unfulfilled',\r\n  'dispatchedParcelMismatch',\r\n  'canceledLostInTransit',\r\n  'refundFailed'\r\n)\r\n",
+          "refId": "C",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Order segmentation",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 2,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": true,
+          "showDebug": false,
+          "showMeasure": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "blur": 25,
+              "radius": 20,
+              "weight": {
+                "fixed": 1,
+                "max": 1,
+                "min": 0
+              }
+            },
+            "location": {
+              "latitude": "lat",
+              "longitude": "lon",
+              "mode": "coords"
+            },
+            "name": "Stores",
+            "opacity": 1,
+            "tooltip": true,
+            "type": "heatmap"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "coords",
+          "lat": 54.149942,
+          "lon": -5.203422,
+          "zoom": 5.32
+        }
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n  stores.lat,\r\n  stores.lon,\r\n  COUNT(stores.id) AS \"count\"\r\nFROM orders \r\nRIGHT JOIN \"orderEvents\" ON orders.number = \"orderEvents\".\"orderNumber\" AND \"orderEvents\".type = 'created'\r\nLEFT JOIN stores ON stores.id = (payload->>'storeId')::integer\r\nWHERE $__timeFilter(orders.\"createdAt\") \r\nGROUP BY stores.id\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Locations",
+      "type": "geomap"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Orders stats",
+  "uid": "ef44e8c7-07e7-44b3-9190-a67e6beca5eb",
+  "version": 20,
+  "weekStart": ""
+}

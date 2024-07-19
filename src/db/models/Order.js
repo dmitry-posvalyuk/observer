@@ -48,25 +48,26 @@ const Order = sequelize.define('orders', {
       is: /^[A-Z]{3}$/
     }
   },
-  totalPrice: {
+  price: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
   storeId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     references: {
       model: Store
     }
   },
   collectedAt: {
-    type: DataTypes.DATE
+    type: DataTypes.DATE,
+    allowNull: false
   },
   shipedAt: {
-    type: DataTypes.DATEONLY
+    type: DataTypes.DATEONLY,
+    allowNull: false
   },
-  completedAt: {
-    type: DataTypes.DATE
-  }
+  completedAt: DataTypes.DATE
 })
 
 export default Order

@@ -27,6 +27,7 @@ const LineItem = sequelize.define(
     },
     sku: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Sku,
         key: 'sku'
@@ -38,6 +39,18 @@ const LineItem = sequelize.define(
     },
     quantity: {
       type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    availableQuantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
       allowNull: false
     }
   },

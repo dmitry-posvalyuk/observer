@@ -1,63 +1,25 @@
 import { faker } from '@faker-js/faker'
-import stores from '../src/db/const/stores'
-import { sequelize, Order, OrderEvent } from '../src/db'
-import EVENT_TYPES from '../src/db/const/eventTypes'
-import customers from './customers.json' assert { type: 'json' }
-import skuList from './skus.json' assert { type: 'json' }
+import { sequelize, Order, OrderEvent } from '../src/db/models/index.js'
+import EVENT_TYPES from '../src/db/const/eventTypes.js'
+import anonymousIds from './anonymousIds.json' assert { type: 'json' }
+import eventHandlers from '../src/eventHandlers/index.js'
+import { getOrderNumber, getCreatedAt, chunkArray, generateLineItems, generateProduct } from './helpers.js'
 
 const ordersCount = 100_000
 
-const storeIds = stores.map(s => s.id)
-
-const getOrderNumber = () => 'GB' + faker.string.numeric({ length: 10 })
-
-const getCreatedAt = refDate => faker.date.soon({ refDate })
-
-const chunkArray = (array, chunkSize = 0) => {
-  chunkSize = faker.number.int({ min: 1, max: 3 })
-  const chunks = []
-  const arrayToChunk = [...array]
-
-  if (chunkSize <= 0) return array
-
-  while (arrayToChunk.length) {
-    chunks.push(arrayToChunk.splice(0, chunkSize))
-  }
-
-  return chunks
-}
-
 const createOrderPipeline = async () => {
-  const [customerRef, customerId] = faker.helpers.arrayElement(customers)
+  const anonymousId = faker.helpers.arrayElement(anonymousIds)
   const orderNumber = getOrderNumber()
   const finishedOrder = new Date()
   const finishedOrdersPeriod = 90
   let createdAt = faker.date.recent({ days: finishedOrdersPeriod, refDate: finishedOrder })
+  const lineItems = generateLineItems()
+  const product = generateProduct(createdAt, orderNumber, anonymousId, lineItems)
 
   let type = EVENT_TYPES.CREATED
   try {
     return sequelize.transaction(async transaction => {
-      const order = await Order.create(
-        {
-          number: orderNumber,
-          status: type,
-          customerId,
-          customerRef,
-          createdAt
-        },
-        { transaction }
-      )
-
-      createdAt = getCreatedAt(createdAt)
-      const created = await OrderEvent.create(
-        {
-          orderNumber,
-          type,
-          payload: { storeId: faker.helpers.arrayElement(storeIds) },
-          createdAt
-        },
-        { transaction }
-      )
+      await eventHandlers[type](product)
 
       createdAt = getCreatedAt(createdAt)
       type = EVENT_TYPES.PAYMENT_PENDING
@@ -138,10 +100,6 @@ const createOrderPipeline = async () => {
         return { type, createdAt, orderNumber }
       }
 
-      let orderItems = faker.helpers.arrayElements(skuList, { min: 1, max: 4 }).map(item => {
-        return { sku: item, qty: faker.number.int({ min: 1, max: 3 }) }
-      })
-
       if (faker.datatype.boolean(0.96)) {
         const tInitialized = await OrderEvent.create(
           {
@@ -168,7 +126,6 @@ const createOrderPipeline = async () => {
         {
           orderNumber,
           type,
-          payload: { orderItems },
           createdAt
         },
         { transaction }
@@ -217,14 +174,14 @@ const createOrderPipeline = async () => {
           { transaction }
         )
       } else {
-        chunkArray(orderItems).forEach(async payload => {
+        chunkArray(lineItems).forEach(async items => {
           createdAt = getCreatedAt(createdAt)
           type = EVENT_TYPES.SHIPMENT
           const shipment = await OrderEvent.create(
             {
               orderNumber,
               type,
-              payload,
+              payload: items.map(i => ({ sku: i.variant.sku, quantity: i.quantity })),
               createdAt
             },
             { transaction }
@@ -688,7 +645,7 @@ const createOrderPipeline = async () => {
   }
 }
 
-for (let i = 1; i <= ordersCount; i++) {
+for (let i = (await Order.count()) || 1; i <= ordersCount; i++) {
   const { type, createdAt, orderNumber } = await createOrderPipeline()
   // finalize order
   await Order.update({ status: type, updatedAt: createdAt, completedAt: createdAt }, { where: { number: orderNumber } })

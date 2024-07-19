@@ -11,19 +11,28 @@ const Product = sequelize.define(
       unique: true
     },
     name: {
-      type: DataTypes.STRING(256)
+      type: DataTypes.STRING(256),
+      allowNull: false
     },
     slug: {
-      type: DataTypes.STRING(128)
+      type: DataTypes.STRING(128),
+      allowNull: false
     },
     imageUrl: {
-      type: DataTypes.STRING(512)
+      type: DataTypes.STRING(512),
+      allowNull: false
     },
     category: {
-      type: DataTypes.STRING(64)
+      type: DataTypes.STRING(64),
+      allowNull: false
+    },
+    section: {
+      type: DataTypes.STRING(128),
+      allowNull: false
     },
     color: {
-      type: DataTypes.STRING(16)
+      type: DataTypes.STRING(32),
+      allowNull: false
     }
   },
   {
