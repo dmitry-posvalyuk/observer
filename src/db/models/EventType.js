@@ -7,6 +7,7 @@ const EventType = sequelize.define(
   {
     name: {
       type: DataTypes.STRING(32),
+      unique: true,
       primaryKey: true
     },
     source: {

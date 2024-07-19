@@ -3,7 +3,7 @@ import { sequelize, Order, OrderEvent } from '../src/db/models/index.js'
 import EVENT_TYPES from '../src/db/const/eventTypes.js'
 import anonymousIds from './anonymousIds.json' assert { type: 'json' }
 import eventHandlers from '../src/eventHandlers/index.js'
-import { getOrderNumber, getCreatedAt, chunkArray, generateLineItems, generateProduct } from './helpers.js'
+import { getOrderNumber, getCreatedAt, chunkArray, generateLineItems, generateProduct, getRefundId } from './helpers.js'
 
 const ordersCount = 100_000
 
@@ -164,11 +164,10 @@ const createOrderPipeline = async () => {
 
       if (faker.datatype.boolean(0.0057)) {
         createdAt = getCreatedAt(createdAt)
-        type = EVENT_TYPES.SHIPMENT_FAILED
         const shipmentFailed = await OrderEvent.create(
           {
             orderNumber,
-            type,
+            type: EVENT_TYPES.SHIPMENT_FAILED,
             createdAt
           },
           { transaction }
@@ -176,11 +175,10 @@ const createOrderPipeline = async () => {
       } else {
         chunkArray(lineItems).forEach(async items => {
           createdAt = getCreatedAt(createdAt)
-          type = EVENT_TYPES.SHIPMENT
           const shipment = await OrderEvent.create(
             {
               orderNumber,
-              type,
+              type: EVENT_TYPES.SHIPMENT,
               payload: items.map(i => ({ sku: i.variant.sku, quantity: i.quantity })),
               createdAt
             },
@@ -191,19 +189,18 @@ const createOrderPipeline = async () => {
 
       if (faker.datatype.boolean(0.0043)) {
         createdAt = getCreatedAt(createdAt)
-        type = EVENT_TYPES.DISPATCH_FAILED
         const dispatchFailed = await OrderEvent.create(
           {
             orderNumber,
-            type,
+            type: EVENT_TYPES.DISPATCH_FAILED,
             createdAt
           },
           { transaction }
         )
       } else {
         createdAt = getCreatedAt(createdAt)
-        type = EVENT_TYPES.DISPATCH
-        const dispatch = await OrderEvent.create(
+        type = EVENT_TYPES.DISPATCHED
+        const dispatched = await OrderEvent.create(
           {
             orderNumber,
             type,
@@ -226,11 +223,10 @@ const createOrderPipeline = async () => {
 
       if (faker.datatype.boolean(0.004)) {
         createdAt = getCreatedAt(createdAt)
-        type = EVENT_TYPES.WMS_ORDER_CONFIRMATION_FAILED
         const wmsOrderConfirmationFailed = await OrderEvent.create(
           {
             orderNumber,
-            type,
+            type: EVENT_TYPES.WMS_ORDER_CONFIRMATION_FAILED,
             createdAt
           },
           { transaction }
@@ -551,7 +547,6 @@ const createOrderPipeline = async () => {
         {
           orderNumber,
           type,
-          payload: { returned: [orderNumber + '-R' + faker.string.numeric({ length: 6 })] },
           createdAt
         },
         { transaction }
@@ -570,11 +565,13 @@ const createOrderPipeline = async () => {
 
       if (faker.datatype.boolean(0.021)) {
         createdAt = getCreatedAt(createdAt)
+
         type = EVENT_TYPES.REFUND_FAILED
         const refundFailed = await OrderEvent.create(
           {
             orderNumber,
             type,
+            payload: { refunded: [getRefundId(orderNumber)] },
             createdAt
           },
           { transaction }
@@ -622,6 +619,7 @@ const createOrderPipeline = async () => {
         {
           orderNumber,
           type,
+          payload: { refunded: [getRefundId(orderNumber)] },
           createdAt
         },
         { transaction }

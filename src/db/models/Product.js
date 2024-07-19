@@ -11,7 +11,7 @@ const Product = sequelize.define(
       unique: true
     },
     name: {
-      type: DataTypes.STRING(256),
+      type: DataTypes.STRING(128),
       allowNull: false
     },
     slug: {
@@ -19,7 +19,7 @@ const Product = sequelize.define(
       allowNull: false
     },
     imageUrl: {
-      type: DataTypes.STRING(512),
+      type: DataTypes.STRING(256),
       allowNull: false
     },
     category: {
@@ -31,7 +31,7 @@ const Product = sequelize.define(
       allowNull: false
     },
     color: {
-      type: DataTypes.STRING(32),
+      type: DataTypes.STRING(64),
       allowNull: false
     }
   },

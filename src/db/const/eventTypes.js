@@ -29,7 +29,7 @@ export default {
   WMS_ORDER_CONFIRMATION_FAILED: 'wmsOrderConfirmationFailed',
   SHIPMENT: 'shipment',
   SHIPMENT_FAILED: 'shipmentFailed',
-  DISPATCH: 'dispatch',
+  DISPATCHED: 'dispatched',
   DISPATCH_FAILED: 'dispatchFailed',
   // notification events
   EMAIL_ORDER_CONFIRMED: 'emailOrderConfirmed',

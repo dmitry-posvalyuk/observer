@@ -111,3 +111,5 @@ export const generateProduct = (createdAt, orderNumber, anonymousId, lineItems) 
     }
   }
 }
+
+export const getRefundId = orderNumber => orderNumber + '-R' + faker.string.numeric({ length: 6 })
