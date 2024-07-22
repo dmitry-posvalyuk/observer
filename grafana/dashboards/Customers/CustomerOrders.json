@@ -18,6 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 24,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -38,12 +39,7 @@
             },
             "inspect": false
           },
-          "links": [
-            {
-              "title": "${__data.fields[\"order number\"]}",
-              "url": "/d/d29bc11c-75de-4ee8-ac1e-d0214cae2072/order-review?var-selectedOrderNumber=${__data.fields[\"order number\"]}"
-            }
-          ],
+          "links": [],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -55,7 +51,25 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "order number"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "/d/c1c6411b-d346-4fba-8e8e-c7e9864a71bc/order-analysis?orgId=1&from=now-30d&to=now&var-selectedOrderNumber=${__value.text}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 15,
@@ -84,7 +98,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  number AS \"order number\",\r\n  status,\r\n  created_at AS created,\r\n  completed_at AS completed\r\nFROM orders \r\nWHERE $__timeFilter(orders.created_at) AND anonymous_id = '$anonymousId'",
+          "rawSql": "SELECT\r\n  number AS \"order number\",\r\n  status,\r\n  created_at AS created,\r\n  completed_at AS completed\r\nFROM orders \r\nWHERE $__timeFilter(orders.created_at) AND anonymous_id = '$anonymous_id'",
           "refId": "A",
           "sql": {
             "columns": [
@@ -187,6 +201,11 @@
                   "horizontal": "center",
                   "vertical": "center"
                 },
+                "text": {
+                  "field": "name",
+                  "fixed": "",
+                  "mode": "field"
+                },
                 "textConfig": {
                   "fontSize": 12,
                   "offsetX": 0,
@@ -223,7 +242,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \r\n  lat,\r\n  lon,\r\n  COUNT(stores.id) AS count\r\nFROM orders \r\nJOIN stores ON orders.store_id = stores.id AND lat IS NOT NULL\r\nWHERE $__timeFilter(created_at)\r\n  AND anonymous_id = '$anonymousId'\r\nGROUP BY \r\n  lat,\r\n  lon",
+          "rawSql": "SELECT \r\n  lat,\r\n  lon,\r\n  name,\r\n  COUNT(stores.id) AS count\r\nFROM orders \r\nJOIN stores ON orders.store_id = stores.id AND lat IS NOT NULL\r\nWHERE $__timeFilter(created_at)\r\n  AND anonymous_id = '$anonymous_id'\r\nGROUP BY \r\n  lat,\r\n  lon,\r\n  name",
           "refId": "A",
           "sql": {
             "columns": [
@@ -246,6 +265,118 @@
       ],
       "title": "Stores",
       "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false,
+            "minWidth": 100
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "image_url"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "image"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pdp"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "",
+                    "url": "${__value}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": ["sum"],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  product_key,\r\n  sku,\r\n  name,\r\n  quantity,\r\n  line_items.created_at AS \"added at\",\r\n  category,\r\n  section,\r\n  color,\r\n  'https://cdn.media.amplience.net/i/primarktest/991102718560_01' AS image_url,\r\n  CONCAT('https://www.primark.com/', LOWER(orders.locale), '/p/', products.slug) as pdp\r\nFROM line_items\r\nJOIN products ON product_key = key\r\nJOIN orders ON line_items.order_number = orders.number AND orders.anonymous_id = '$anonymous_id'\r\nWHERE $__timeFilter(orders.created_at)\r\nORDER BY line_items.updated_at",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Сustomer Purchases",
+      "type": "table"
     }
   ],
   "refresh": "",
@@ -267,7 +398,7 @@
         "hide": 0,
         "includeAll": false,
         "multi": false,
-        "name": "anonymousId",
+        "name": "anonymous_id",
         "options": [],
         "query": "SELECT anonymous_id FROM customers",
         "refresh": 2,
@@ -285,8 +416,8 @@
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
-  "title": "Customers",
+  "title": "Customer Orders",
   "uid": "b4adc323-d29d-40ec-ab47-62ff587e98ec",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

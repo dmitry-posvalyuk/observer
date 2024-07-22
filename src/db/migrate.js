@@ -4,7 +4,7 @@ import SOURCES from './const/sources.js'
 
 sequelize
   .sync({
-    // force: true,
+    force: true,
     alter: true
   })
   .then(async () => {

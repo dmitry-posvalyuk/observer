@@ -372,7 +372,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  number,\r\n  status,\r\n  anonymous_id,\r\n  price,\r\n  created_at,\r\n  updated_at,\r\n  shiped_at,\r\n  collected_at\r\nFROM orders\r\nWHERE store_id = $selected_store_id\r\nORDER BY updated_at DESC",
+          "rawSql": "SELECT\r\n  number,\r\n  status,\r\n  anonymous_id,\r\n  price / 100 AS price,\r\n  created_at,\r\n  updated_at,\r\n  shiped_at,\r\n  collected_at\r\nFROM orders\r\nWHERE store_id = $selected_store_id\r\nORDER BY updated_at DESC",
           "refId": "A",
           "sql": {
             "columns": [
@@ -404,7 +404,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "441",
           "value": "441"
         },
@@ -437,6 +437,6 @@
   "timezone": "browser",
   "title": "Store Activity",
   "uid": "fds9p9hn46xoga",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }

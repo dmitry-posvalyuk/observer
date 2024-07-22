@@ -36,6 +36,7 @@
             },
             "inspect": false
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -43,10 +44,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -81,7 +78,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  status,\r\n  anonymous_id,\r\n  price,\r\n  store_id,\r\n  created_at,\r\n  updated_at,\r\n  collected_at,\r\n  shiped_at\r\nFROM orders\r\nWHERE number = '$selected_order_number'",
+          "rawSql": "SELECT\r\n  status,\r\n  anonymous_id,\r\n  (price::float / 100) AS price,\r\n  store_id::text,\r\n  created_at,\r\n  updated_at,\r\n  collected_at,\r\n  shiped_at\r\nFROM orders\r\nWHERE number = '$selected_order_number'",
           "refId": "A",
           "sql": {
             "columns": [
@@ -120,6 +117,7 @@
             "inspect": false,
             "minWidth": 100
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -193,7 +191,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  product_key,\r\n  sku,\r\n  name,\r\n  slug,\r\n  line_items.price,\r\n  quantity,\r\n  available_quantity,\r\n  line_items.created_at AS \"added at\",\r\n  line_items.updated_at AS \"modified at\",\r\n  category,\r\n  section,\r\n  color,\r\n  'https://cdn.media.amplience.net/i/primarktest/991102718560_01' AS image_url,\r\n  CONCAT('https://www.primark.com/', LOWER(orders.locale), '/p/', products.slug) as pdp\r\nFROM line_items\r\nJOIN products ON product_key = key\r\nJOIN orders ON line_items.order_number = orders.number\r\nWHERE order_number = '$selected_order_number'",
+          "rawSql": "SELECT\r\n  product_key::text,\r\n  sku::text,\r\n  name,\r\n  line_items.price::float / 100 AS price,\r\n  quantity::text,\r\n  line_items.created_at AS \"added at\",\r\n  line_items.updated_at AS \"modified at\",\r\n  category,\r\n  section,\r\n  color,\r\n  'https://cdn.media.amplience.net/i/primarktest/991102718560_01' AS image_url,\r\n  CONCAT('https://www.primark.com/', LOWER(orders.locale), '/p/', products.slug) as pdp\r\nFROM line_items\r\nJOIN products ON product_key = key\r\nJOIN orders ON line_items.order_number = orders.number\r\nWHERE order_number = '$selected_order_number'",
           "refId": "A",
           "sql": {
             "columns": [
@@ -447,8 +445,8 @@
       {
         "current": {
           "selected": false,
-          "text": "GB5511945933",
-          "value": "GB5511945933"
+          "text": "GB2151599106",
+          "value": "GB2151599106"
         },
         "datasource": {
           "type": "grafana-postgresql-datasource",
@@ -471,8 +469,8 @@
     ]
   },
   "time": {
-    "from": "2024-05-12T22:16:59.990Z",
-    "to": "2024-07-19T12:39:40.622Z"
+    "from": "now-30d",
+    "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {
@@ -481,6 +479,6 @@
   "timezone": "",
   "title": "Order Analysis",
   "uid": "c1c6411b-d346-4fba-8e8e-c7e9864a71bc",
-  "version": 3,
+  "version": 5,
   "weekStart": ""
 }

@@ -885,7 +885,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  number,\r\n  status,\r\n  anonymous_id,\r\n  price,\r\n  store_id,\r\n  created_at,\r\n  updated_at,\r\n  shiped_at,\r\n  collected_at\r\nFROM orders\r\nWHERE completed_at IS NULL\r\n  AND created_at > NOW() - INTERVAL '2 WEEKS'\r\nORDER BY updated_at DESC",
+          "rawSql": "SELECT\r\n  number,\r\n  status,\r\n  anonymous_id,\r\n  price / 100 as price,\r\n  store_id,\r\n  created_at,\r\n  updated_at,\r\n  shiped_at,\r\n  collected_at\r\nFROM orders\r\nWHERE completed_at IS NULL\r\n  AND created_at > NOW() - INTERVAL '2 WEEKS'\r\nORDER BY updated_at DESC",
           "refId": "A",
           "sql": {
             "columns": [
@@ -926,6 +926,6 @@
   "timezone": "browser",
   "title": "Active Orders",
   "uid": "dds96boqeozk0d",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

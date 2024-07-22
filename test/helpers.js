@@ -21,12 +21,12 @@ export const chunkArray = (array, chunkSize = 0) => {
 }
 
 export const generateLineItems = () => {
-  return faker.helpers.arrayElements(products, { min: 1, max: 4 }).map(({ productKey, skus, centAmount }) => ({
+  return faker.helpers.arrayElements(products, { min: 1, max: 4 }).map(({ productKey, skus, centAmount }, index) => ({
     productKey,
     name: { 'en-GB': faker.commerce.productName() },
     productSlug: { 'en-GB': faker.lorem.slug({ min: 2, max: 6 }) + '-' + productKey },
     variant: {
-      sku: faker.helpers.arrayElement(skus),
+      sku: skus[index] || faker.helpers.arrayElement(skus),
       images: [
         {
           url: 'https://cdn.media.amplience.net/i/primarktest/' + productKey + '_01'
