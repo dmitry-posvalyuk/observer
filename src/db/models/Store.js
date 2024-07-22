@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, STRING } from 'sequelize'
 import sequelize from './sequelize.js'
 
 const Store = sequelize.define(
@@ -8,9 +8,14 @@ const Store = sequelize.define(
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    name: DataTypes.STRING(64),
+    name: DataTypes.STRING(128),
+    address: DataTypes.STRING(256),
     lat: DataTypes.DECIMAL,
-    lon: DataTypes.DECIMAL
+    lon: DataTypes.DECIMAL,
+    bins: DataTypes.SMALLINT,
+    location: DataTypes.STRING(3),
+    capacity: DataTypes.SMALLINT,
+    orderLimit: DataTypes.SMALLINT
   },
   {
     timestamps: false

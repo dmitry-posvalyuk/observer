@@ -1,302 +1,1179 @@
 export default [
   {
-    name: 'Aberdeen, 153 Union Street, AB11 6BH',
+    id: 600,
+    name: null,
+    address: 'Aberdeen, 153 Union Street, AB11 6BH',
     lat: 57.1459139,
     lon: -2.1030368,
-    id: 600
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Ayr, Unit 8 Taran Walk, KA7 1TU',
+    id: 494,
+    name: null,
+    address: 'Ayr, Unit 8 Taran Walk, KA7 1TU',
     lat: 55.4597282,
     lon: -4.6282419,
-    id: 494
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Ballymena, 30 A Tower Centre, BT43 6AH',
+    id: 456,
+    name: null,
+    address: 'Ballymena, 30 A Tower Centre, BT43 6AH',
     lat: 54.866842,
     lon: -6.2788701,
-    id: 456
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Banbury, Banbury Gateway, OX16 3AB',
+    id: 693,
+    name: null,
+    address: 'Banbury, Banbury Gateway, OX16 3AB',
     lat: 52.0766665,
     lon: -1.3210691,
-    id: 693
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Barnsley, Unit 4, S70 1SB',
+    id: 520,
+    name: null,
+    address: 'Barnsley, Unit 4, S70 1SB',
     lat: 53.5510379,
     lon: -1.4804607,
-    id: 520
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Barnstaple, 49 - 52 High Street, EX31 1BZ',
+    id: 521,
+    name: null,
+    address: 'Barnstaple, 49 - 52 High Street, EX31 1BZ',
     lat: 51.0821401,
     lon: -4.0638629,
-    id: 521
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Basildon, 106 - 114 Town Square, SS14 1BX',
+    id: 527,
+    name: null,
+    address: 'Basildon, 106 - 114 Town Square, SS14 1BX',
     lat: 51.5698971,
     lon: 0.4567798,
-    id: 527
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Basingstoke, Unit 6 Castle Square, RG21 7QU',
+    id: 645,
+    name: null,
+    address: 'Basingstoke, Unit 6 Castle Square, RG21 7QU',
     lat: 51.2670493,
     lon: -1.0900981,
-    id: 645
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bath, 38 - 39 Stall Street, BA1 1QH',
+    id: 687,
+    name: null,
+    address: 'Bath, 38 - 39 Stall Street, BA1 1QH',
     lat: 51.3812189,
     lon: -2.3628544,
-    id: 687
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bedford, 29 - 35 Midland Road, MK40 1TJ',
+    id: 601,
+    name: null,
+    address: 'Bedford, 29 - 35 Midland Road, MK40 1TJ',
     lat: 52.1365361,
     lon: -0.4726696,
-    id: 601
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Belfast, 1-27 Castle Street, BT1 1BL',
+    id: 445,
+    name: null,
+    address: 'Belfast, 1-27 Castle Street, BT1 1BL',
     lat: 54.5992386,
     lon: -5.9339637,
-    id: 445
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bexleyheath, Unit 4 131 The Broadway, DA6 7HF',
+    id: 501,
+    name: null,
+    address: 'Bexleyheath, Unit 4 131 The Broadway, DA6 7HF',
     lat: 51.4565454,
     lon: 0.1404354,
-    id: 501
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Birkenhead, 212 - 218 Grange Road, CH41 6EA',
+    id: 575,
+    name: null,
+    address: 'Birkenhead, 212 - 218 Grange Road, CH41 6EA',
     lat: 53.3896196,
     lon: -3.0301619,
-    id: 575
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Birmingham, 1B-3A, The Fort Shopping Centre, B24 9FP',
+    id: 476,
+    name: null,
+    address: 'Birmingham, 1B-3A, The Fort Shopping Centre, B24 9FP',
     lat: 52.5084588,
     lon: -1.8247014,
-    id: 476
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Birmingham, 38 High Street, B4 7SL',
+    id: 689,
+    name: null,
+    address: 'Birmingham, 38 High Street, B4 7SL',
     lat: 52.4788988,
     lon: -1.8966296,
-    id: 689
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Blackburn, 20 Cobden Court, BB17JG',
+    id: 646,
+    name: null,
+    address: 'Blackburn, 20 Cobden Court, BB17JG',
     lat: 53.7484351,
     lon: -2.4840347,
-    id: 646
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Blackpool, 50 - 70 Bank Hey Street, FY1 4RY',
+    id: 602,
+    name: null,
+    address: 'Blackpool, 50 - 70 Bank Hey Street, FY1 4RY',
     lat: 53.8157803,
     lon: -3.056875,
-    id: 602
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Greenhithe, Bluewater, DA99SQ',
+    id: 444,
+    name: null,
+    address: 'Greenhithe, Bluewater, DA99SQ',
     lat: 51.4389482,
     lon: 0.2685354,
-    id: 444
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bolton, 40 Bradshawgate, BL1 1EA',
+    id: 552,
+    name: null,
+    address: 'Bolton, 40 Bradshawgate, BL1 1EA',
     lat: 53.5785313,
     lon: -2.4296581,
-    id: 552
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bournemouth, 599 - 607 Christchurch Road, BH1 4AN',
+    id: 570,
+    name: null,
+    address: 'Bournemouth, 599 - 607 Christchurch Road, BH1 4AN',
     lat: 50.7262018,
     lon: -1.8415889,
-    id: 570
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bournemouth, 48 - 54 Commercial Road, BH2 5LR',
+    id: 658,
+    name: null,
+    address: 'Bournemouth, 48 - 54 Commercial Road, BH2 5LR',
     lat: 50.7203604,
     lon: -1.8848041,
-    id: 658
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bracknell, The Lexicon, RG12 1DF',
+    id: 490,
+    name: null,
+    address: 'Bracknell, The Lexicon, RG12 1DF',
     lat: 51.4164912,
     lon: -0.7528083,
-    id: 490
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bradford, Kirkgate Centre, BD1 3LB',
+    id: 603,
+    name: null,
+    address: 'Bradford, Kirkgate Centre, BD1 3LB',
     lat: 53.7949484,
     lon: -1.7575312,
-    id: 603
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Glasgow, Unit 1a Braehead Shopping Centre, G51 4BS',
+    id: 665,
+    name: null,
+    address: 'Glasgow, Unit 1a Braehead Shopping Centre, G51 4BS',
     lat: 55.8770996,
     lon: -4.369574,
-    id: 665
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Brighton, 169 - 174 Western Road, BN1 2BA',
+    id: 605,
+    name: null,
+    address: 'Brighton, 169 - 174 Western Road, BN1 2BA',
     lat: 50.8243015,
     lon: -0.1507948,
-    id: 605
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bristol, 1-27 The Horsefair, BS1 3BB',
+    id: 550,
+    name: null,
+    address: 'Bristol, 1-27 The Horsefair, BS1 3BB',
     lat: 51.4583816,
     lon: -2.5937035,
-    id: 550
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bromley, 162 High Street, BR1 1HE',
+    id: 496,
+    name: null,
+    address: 'Bromley, 162 High Street, BR1 1HE',
     lat: 51.4051238,
     lon: 0.0117584,
-    id: 496
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Burnley, Charter Walk Shopping Centre, BB11 1BB',
+    id: 441,
+    name: null,
+    address: 'Burnley, Charter Walk Shopping Centre, BB11 1BB',
     lat: 53.7899191,
     lon: -2.2458981,
-    id: 441
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Burton-on-Trent, 22 - 26 St Modwens Walk, DE14 1HL',
+    id: 604,
+    name: null,
+    address: 'Burton-on-Trent, 22 - 26 St Modwens Walk, DE14 1HL',
     lat: 52.801414,
     lon: -1.6340043,
-    id: 604
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bury, The Rock Shopping Centre, BL9 0ND',
+    id: 653,
+    name: null,
+    address: 'Bury, The Rock Shopping Centre, BL9 0ND',
     lat: 53.5944594,
     lon: -2.2921631,
-    id: 653
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Bury St Edmunds, 3 Charter Square, IP33 3FD',
+    id: 595,
+    name: null,
+    address: 'Bury St Edmunds, 3 Charter Square, IP33 3FD',
     lat: 52.2459295,
     lon: 0.7074509,
-    id: 595
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Newry, Unit 55 Buttercrane Shopping Centre, BT35 8HJ',
+    id: 475,
+    name: null,
+    address: 'Newry, Unit 55 Buttercrane Shopping Centre, BT35 8HJ',
     lat: 54.1717814,
     lon: -6.3433926,
-    id: 475
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Camberley, 35 - 41 Park Street, GU15 3PE',
+    id: 606,
+    name: null,
+    address: 'Camberley, 35 - 41 Park Street, GU15 3PE',
     lat: 51.3376732,
     lon: -0.7500376,
-    id: 606
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Cambridge, 62-74 Burleigh St, CB1 1DJ',
+    id: 649,
+    name: null,
+    address: 'Cambridge, 62-74 Burleigh St, CB1 1DJ',
     lat: 52.2055299,
     lon: 0.1304637,
-    id: 649
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Canterbury, Marlowe Arcade, CT1 2TE',
+    id: 688,
+    name: null,
+    address: 'Canterbury, Marlowe Arcade, CT1 2TE',
     lat: 51.2776521,
     lon: 1.077499,
-    id: 688
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Cardiff, 48 Queen Street, CF10 2GQ',
+    id: 683,
+    name: null,
+    address: 'Cardiff, 48 Queen Street, CF10 2GQ',
     lat: 51.4813328,
     lon: -3.1777946,
-    id: 683
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Carlisle, 1 English Street, CA3 8NX',
+    id: 696,
+    name: null,
+    address: 'Carlisle, 1 English Street, CA3 8NX',
     lat: 54.8944197,
     lon: -2.9371386,
-    id: 696
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Gateshead, Central Mall, NE11 9YG',
+    id: 670,
+    name: null,
+    address: 'Gateshead, Central Mall, NE11 9YG',
     lat: 54.9583647,
     lon: -1.6729102,
-    id: 670
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'London, Brocklebank Retail Park, SE7 7SX',
+    id: 486,
+    name: null,
+    address: 'London, Brocklebank Retail Park, SE7 7SX',
     lat: 51.4901208,
     lon: 0.020448,
-    id: 486
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Chatham, 194 - 198 High Street, ME4 4AY',
+    id: 502,
+    name: null,
+    address: 'Chatham, 194 - 198 High Street, ME4 4AY',
     lat: 51.3821103,
     lon: 0.5230092,
-    id: 502
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Chelmsford, 9 High Chelmer, CM1 1XL',
+    id: 676,
+    name: null,
+    address: 'Chelmsford, 9 High Chelmer, CM1 1XL',
     lat: 51.732881,
     lon: 0.4695969,
-    id: 676
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Cheltenham, 201 - 207 High Street, GL50 3HH',
+    id: 607,
+    name: null,
+    address: 'Cheltenham, 201 - 207 High Street, GL50 3HH',
     lat: 51.9015025,
     lon: -2.0774964,
-    id: 607
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Chester, 52-60 Foregate St, CH1 1HA',
+    id: 651,
+    name: null,
+    address: 'Chester, 52-60 Foregate St, CH1 1HA',
     lat: 53.1909641,
     lon: -2.8883271,
-    id: 651
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Chester, 2A, Broughton Shopping Centre, CH4 0DE',
+    id: 481,
+    name: null,
+    address: 'Chester, 2A, Broughton Shopping Centre, CH4 0DE',
     lat: 53.1690593,
     lon: -2.9754018,
-    id: 481
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Chesterfield, 9-13 Market Place, S40 1PJ',
+    id: 608,
+    name: null,
+    address: 'Chesterfield, 9-13 Market Place, S40 1PJ',
     lat: 53.2359217,
     lon: -1.4313774,
-    id: 608
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Clydebank, Unit 2 117 Sylvania Way, G81 2RR',
+    id: 586,
+    name: null,
+    address: 'Clydebank, Unit 2 117 Sylvania Way, G81 2RR',
     lat: 55.9060919,
     lon: -4.4055196,
-    id: 586
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Colchester, Lion Walk Shopping Centre, CO1 1LF',
+    id: 485,
+    name: null,
+    address: 'Colchester, Lion Walk Shopping Centre, CO1 1LF',
     lat: 51.8884294,
     lon: 0.897498,
-    id: 485
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Corby, 1A Willow Place, NN17 1BH',
+    id: 648,
+    name: null,
+    address: 'Corby, 1A Willow Place, NN17 1BH',
     lat: 52.4867508,
     lon: -0.7053217,
-    id: 648
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Coventry, Broadgate, CV1 1NA',
+    id: 497,
+    name: null,
+    address: 'Coventry, Broadgate, CV1 1NA',
     lat: 52.4084048,
     lon: -1.5127929,
-    id: 497
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
   },
   {
-    name: 'Craigavon, Unit A Rushmere Shopping Centre, BT64 1AA',
+    id: 469,
+    name: null,
+    address: 'Craigavon, Unit A Rushmere Shopping Centre, BT64 1AA',
     lat: 54.4490344,
     lon: -6.3936151,
-    id: 469
+    bins: null,
+    location: null,
+    capacity: null,
+    orderLimit: null
+  },
+  {
+    id: 514,
+    name: 'Wandsworth',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 3,
+    location: 'LON',
+    capacity: 90,
+    orderLimit: 42
+  },
+  {
+    id: 576,
+    name: 'WALLASEY',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 4,
+    location: 'NW',
+    capacity: 120,
+    orderLimit: 56
+  },
+  {
+    id: 635,
+    name: 'SOUTHPORT',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 4,
+    location: 'NW',
+    capacity: 120,
+    orderLimit: 56
+  },
+  {
+    id: 633,
+    name: 'PRESTON',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 4,
+    location: 'NW',
+    capacity: 120,
+    orderLimit: 56
+  },
+  {
+    id: 532,
+    name: 'HUDDERSFILED',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'NW',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 567,
+    name: 'Woolwich',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'LON',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 505,
+    name: 'Hackney',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'LON',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 636,
+    name: 'Sutton',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'LON',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 661,
+    name: 'Ilford',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'LON',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 506,
+    name: 'Hounslow',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'LON',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 696,
+    name: 'CARLISLE',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'NW',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 651,
+    name: 'CHESTER',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'NW',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 530,
+    name: 'WIGAN',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'NW',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 533,
+    name: 'Lewisham',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'LON',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 515,
+    name: 'Wembley',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'LON',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 483,
+    name: 'Uxbridge',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 5,
+    location: 'LON',
+    capacity: 150,
+    orderLimit: 70
+  },
+  {
+    id: 526,
+    name: 'WREXHAM',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 481,
+    name: 'BROUGHTON PARK',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 681,
+    name: 'WARRINGTON',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 441,
+    name: 'BURNLEY',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 507,
+    name: 'Kilburn',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 501,
+    name: 'Bexleyheath',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 522,
+    name: 'Hammersmith',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 437,
+    name: 'Harrow New',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 671,
+    name: 'Stratford',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 694,
+    name: 'LLANDUDNO',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 552,
+    name: 'BOLTON',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 646,
+    name: 'BLACKBURN',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 653,
+    name: 'BURY',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 489,
+    name: 'SHEFFIELD THE MOOR',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'NW',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 543,
+    name: 'Dartford',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 442,
+    name: 'Staines',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 511,
+    name: 'Peckham',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 504,
+    name: 'East Ham',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 486,
+    name: 'Charlton',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 517,
+    name: 'Tooting',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 644,
+    name: 'Ealing',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 528,
+    name: 'Romford',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 580,
+    name: 'Watford',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 581,
+    name: 'Kingston',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 496,
+    name: 'Bromley',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 609,
+    name: 'Croydon',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 438,
+    name: 'White City',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 652,
+    name: 'Wood Green',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 6,
+    location: 'LON',
+    capacity: 180,
+    orderLimit: 84
+  },
+  {
+    id: 590,
+    name: 'LDN OSW',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 7,
+    location: 'LON',
+    capacity: 210,
+    orderLimit: 98
+  },
+  {
+    id: 692,
+    name: 'LANCASTER',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 7,
+    location: 'NW',
+    capacity: 210,
+    orderLimit: 98
+  },
+  {
+    id: 575,
+    name: 'BIRKENHEAD',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 7,
+    location: 'NW',
+    capacity: 210,
+    orderLimit: 98
+  },
+  {
+    id: 640,
+    name: 'LIVERPOOL',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 7,
+    location: 'NW',
+    capacity: 210,
+    orderLimit: 98
+  },
+  {
+    id: 435,
+    name: 'TRAFFORD CENTRE',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 7,
+    location: 'NW',
+    capacity: 210,
+    orderLimit: 98
+  },
+  {
+    id: 589,
+    name: 'Lakeside',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 7,
+    location: 'LON',
+    capacity: 210,
+    orderLimit: 98
+  },
+  {
+    id: 444,
+    name: 'Bluewater',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 8,
+    location: 'LON',
+    capacity: 240,
+    orderLimit: 113
+  },
+  {
+    id: 674,
+    name: 'LDN OSE (SOL)',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 8,
+    location: 'LON',
+    capacity: 240,
+    orderLimit: 113
+  },
+  {
+    id: 629,
+    name: 'OLDHAM',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 8,
+    location: 'NW',
+    capacity: 240,
+    orderLimit: 113
+  },
+  {
+    id: 669,
+    name: 'STOCKPORT',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 8,
+    location: 'NW',
+    capacity: 240,
+    orderLimit: 113
+  },
+  {
+    id: 602,
+    name: 'BLACKPOOL',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 8,
+    location: 'NW',
+    capacity: 240,
+    orderLimit: 127
+  },
+  {
+    id: 642,
+    name: 'MEADOWHALL',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 8,
+    location: 'NW',
+    capacity: 240,
+    orderLimit: 155
+  },
+  {
+    id: 519,
+    name: 'MANCHESTER - MKT ST',
+    address: null,
+    lat: null,
+    lon: null,
+    bins: 8,
+    location: 'NW',
+    capacity: 240,
+    orderLimit: 211
   }
 ]
