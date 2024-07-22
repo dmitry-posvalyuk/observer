@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 32,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -41,13 +41,12 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 13,
         "w": 24,
         "x": 0,
         "y": 0
@@ -66,7 +65,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.0.1",
       "targets": [
         {
           "datasource": {
@@ -76,8 +75,8 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  name,\r\n  COUNT(\"eventTypes\".name)\r\nFROM \"eventTypes\"\r\nJOIN orders ON orders.status = \"eventTypes\".name\r\nWHERE $__timeFilter(\"createdAt\")\r\nGROUP BY \"eventTypes\".name",
-          "refId": "A",
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'cancelledNoInventory'\r\nGROUP BY status",
+          "refId": "cancelledNoInventory",
           "sql": {
             "columns": [
               {
@@ -105,8 +104,269 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  'confirmed',\r\n  COUNT(number)\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\")",
-          "refId": "B",
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'paymentAuthFailed'\r\nGROUP BY status",
+          "refId": "paymentAuthFailed",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'paymentCaptureFailed'\r\nGROUP BY status",
+          "refId": "paymentCaptureFailed",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'paymentCanceled'\r\nGROUP BY status",
+          "refId": "paymentCanceled",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'authorisationCanceled'\r\nGROUP BY status",
+          "refId": "authorisationCanceled",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'authorisationCancelFailed'\r\nGROUP BY status",
+          "refId": "authorisationCancelFailed",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'dispatchedParcelMismatch'\r\nGROUP BY status",
+          "refId": "dispatchedParcelMismatch",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'canceledLostInTransit'\r\nGROUP BY status",
+          "refId": "canceledLostInTransit",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'canceled'\r\nGROUP BY status",
+          "refId": "canceled",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'refundSuccess'\r\nGROUP BY status",
+          "refId": "refundSuccess",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  status,\r\n  COUNT(status)\r\nFROM orders\r\nWHERE $__timeFilter(completed_at) AND status = 'refundFailed'\r\nGROUP BY status",
+          "refId": "refundFailed",
           "sql": {
             "columns": [
               {
@@ -126,7 +386,7 @@
           }
         }
       ],
-      "title": "Order status counters",
+      "title": "Order Status Counters",
       "type": "gauge"
     },
     {
@@ -184,8 +444,7 @@
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
@@ -193,7 +452,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 13
       },
       "id": 5,
       "options": {
@@ -204,6 +463,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -217,7 +477,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__timeGroupAlias(\"createdAt\", '1d'),\r\n  COUNT(number) as \"refunded\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status = 'refundSuccess'\r\nGROUP BY time\r\nORDER BY time",
+          "rawSql": "SELECT\r\n  $__timeGroupAlias(created_at, '1d'),\r\n  COUNT(number) as refunded\r\nFROM orders\r\nWHERE $__timeFilter(created_at) AND status = 'refundSuccess'\r\nGROUP BY time",
           "refId": "refunded",
           "sql": {
             "columns": [
@@ -246,7 +506,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__timeGroupAlias(\"createdAt\", '1d'),\r\n  COUNT(number) as \"collected\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status = 'collected'\r\nGROUP BY time\r\nORDER BY time\r\n",
+          "rawSql": "SELECT\r\n  $__timeGroupAlias(created_at, '1d'),\r\n  COUNT(number) as collected\r\nFROM orders\r\nWHERE $__timeFilter(created_at) AND completed_at IS NOT NULL AND status = 'collected'\r\nGROUP BY time\r\n",
           "refId": "collected",
           "sql": {
             "columns": [
@@ -275,7 +535,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__timeGroupAlias(\"createdAt\", '1d'),\r\n  COUNT(number) as \"failed\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status in (\r\n  'cancelFailed',\r\n  'cancelledNoInventory',\r\n  'paymentAuthFailed',\r\n  'paymentCaptureFailed',\r\n  'paymentCanceled',\r\n  'unfulfilled',\r\n  'dispatchedParcelMismatch',\r\n  'canceledLostInTransit',\r\n  'refundFailed'\r\n)\r\nGROUP BY time\r\nORDER BY time\r\n",
+          "rawSql": "SELECT\r\n  $__timeGroupAlias(created_at, '1d'),\r\n  COUNT(number) as failed\r\nFROM orders\r\nWHERE $__timeFilter(created_at) AND status IN (\r\n  'authorisationCancelFailed',\r\n  'paymentAuthFailed',\r\n  'paymentCaptureFailed',\r\n  'dispatchedParcelMismatch',\r\n  'canceledLostInTransit',\r\n  'refundFailed'\r\n)\r\nGROUP BY time\r\n",
           "refId": "failed",
           "sql": {
             "columns": [
@@ -304,8 +564,8 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  $__timeGroupAlias(\"createdAt\", '1d'),\r\n  COUNT(number) as \"confirmed\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\")\r\nGROUP BY time\r\nORDER BY time\r\n",
-          "refId": "A",
+          "rawSql": "SELECT\r\n  $__timeGroupAlias(created_at, '1d'),\r\n  COUNT(number) as canceled\r\nFROM orders\r\nWHERE $__timeFilter(created_at) AND status IN ('authorisationCanceled', 'canceled', 'cancelledNoInventory', 'paymentCanceled', 'canceledLostInTransit')\r\nGROUP BY time\r\n",
+          "refId": "canceled",
           "sql": {
             "columns": [
               {
@@ -325,7 +585,7 @@
           }
         }
       ],
-      "title": "Order stats",
+      "title": "Order Groups",
       "type": "timeseries"
     },
     {
@@ -339,18 +599,12 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "links": [
-            {
-              "title": "${__data.fields[\"number\"]}",
-              "url": "/d/d29bc11c-75de-4ee8-ac1e-d0214cae2072/order-review?var-selectedOrderNumber=${__data.fields[\"number\"]}"
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             }
-          ],
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -360,305 +614,15 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "number"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 135
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "status"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 107
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "customerRef"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 368
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "customerId"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 102
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "createdAt"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 176
-              }
-            ]
           }
-        ]
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 15,
         "w": 16,
         "x": 0,
-        "y": 24
-      },
-      "id": 1,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": true,
-          "fields": "",
-          "reducer": ["sum"],
-          "show": false
-        },
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "number"
-          }
-        ]
-      },
-      "pluginVersion": "10.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "grafana-postgresql-datasource",
-            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "rawQuery": true,
-          "rawSql": "SELECT \r\n  number,\r\n  status,\r\n  \"customerRef\",\r\n  \"customerId\",\r\n  \"createdAt\",\r\n  \"completedAt\"\r\nFROM orders \r\nWHERE $__timeFilter(\"createdAt\") \r\nORDER BY \"createdAt\"\r\n",
-          "refId": "A",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          },
-          "table": "orders"
-        }
-      ],
-      "title": "Orders activity",
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "grafana-postgresql-datasource",
-        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": [],
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 15,
-        "w": 8,
-        "x": 16,
-        "y": 24
-      },
-      "id": 4,
-      "options": {
-        "displayLabels": ["percent", "value"],
-        "legend": {
-          "displayMode": "list",
-          "placement": "right",
-          "showLegend": true,
-          "values": ["value"]
-        },
-        "pieType": "pie",
-        "reduceOptions": {
-          "calcs": [],
-          "fields": "/.*/",
-          "values": false
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "grafana-postgresql-datasource",
-            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "rawQuery": true,
-          "rawSql": "SELECT\r\nCOUNT(*) as \"refunded\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status = 'refundSuccess'",
-          "refId": "A",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          }
-        },
-        {
-          "datasource": {
-            "type": "grafana-postgresql-datasource",
-            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "hide": false,
-          "rawQuery": true,
-          "rawSql": "SELECT\r\nCOUNT(*) as \"collected\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status = 'collected'\r\n",
-          "refId": "B",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          }
-        },
-        {
-          "datasource": {
-            "type": "grafana-postgresql-datasource",
-            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "hide": false,
-          "rawQuery": true,
-          "rawSql": "SELECT\r\nCOUNT(*) as \"failed\"\r\nFROM orders\r\nWHERE $__timeFilter(\"createdAt\") AND status in (\r\n  'cancelFailed',\r\n  'cancelledNoInventory',\r\n  'paymentAuthFailed',\r\n  'paymentCaptureFailed',\r\n  'paymentCanceled',\r\n  'unfulfilled',\r\n  'dispatchedParcelMismatch',\r\n  'canceledLostInTransit',\r\n  'refundFailed'\r\n)\r\n",
-          "refId": "C",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          }
-        }
-      ],
-      "title": "Order segmentation",
-      "type": "piechart"
-    },
-    {
-      "datasource": {
-        "type": "grafana-postgresql-datasource",
-        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              }
-            ]
-          },
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 19,
-        "w": 24,
-        "x": 0,
-        "y": 39
+        "y": 27
       },
       "id": 2,
       "options": {
@@ -703,12 +667,12 @@
         "view": {
           "allLayers": true,
           "id": "coords",
-          "lat": 54.149942,
-          "lon": -5.203422,
-          "zoom": 5.32
+          "lat": 53.629009,
+          "lon": -3.805345,
+          "zoom": 6.32
         }
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.0.1",
       "targets": [
         {
           "datasource": {
@@ -717,8 +681,9 @@
           },
           "editorMode": "code",
           "format": "table",
+          "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT \r\n  stores.lat,\r\n  stores.lon,\r\n  COUNT(stores.id) AS \"count\"\r\nFROM orders \r\nRIGHT JOIN \"orderEvents\" ON orders.number = \"orderEvents\".\"orderNumber\" AND \"orderEvents\".type = 'created'\r\nLEFT JOIN stores ON stores.id = (payload->>'storeId')::integer\r\nWHERE $__timeFilter(orders.\"createdAt\") \r\nGROUP BY stores.id\r\n",
+          "rawSql": "SELECT \r\n  lat,\r\n  lon,\r\n  COUNT(store_id) AS count\r\nFROM orders \r\nLEFT JOIN stores ON store_id = stores.id\r\nWHERE $__timeFilter(created_at)\r\n  AND completed_at iS NOT NULL\r\n  AND lat IS NOT NULL\r\nGROUP BY \r\n  lat,\r\n  lon\r\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -739,8 +704,118 @@
           }
         }
       ],
-      "title": "Locations",
+      "title": "Stores Activity",
       "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 8,
+        "x": 16,
+        "y": 27
+      },
+      "id": 4,
+      "options": {
+        "displayLabels": ["percent", "value"],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": ["value"]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/.*/",
+          "values": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\nCOUNT(*) as delivered\r\nFROM orders\r\nWHERE $__timeFilter(created_at)\r\n  AND completed_at iS NOT NULL\r\n  AND status = 'collected'",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\nCOUNT(*) as \"not delivered\"\r\nFROM orders\r\nWHERE $__timeFilter(created_at)\r\n  AND completed_at iS NOT NULL\r\n  AND status != 'collected'",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Order segmentation",
+      "type": "piechart"
     }
   ],
   "refresh": "",
@@ -753,10 +828,11 @@
     "from": "now-30d",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
-  "title": "Orders stats",
+  "title": "Finished Orders",
   "uid": "ef44e8c7-07e7-44b3-9190-a67e6beca5eb",
-  "version": 20,
+  "version": 2,
   "weekStart": ""
 }

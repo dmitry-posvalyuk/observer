@@ -6,6 +6,8 @@ import eventHandlers from '../src/eventHandlers/index.js'
 import { getOrderNumber, getCreatedAt, chunkArray, generateLineItems, generateProduct, getRefundId } from './helpers.js'
 
 const ordersCount = 100_000
+const dayInSec = 1000 * 60 * 60 * 24
+const now = Date.now()
 
 const createOrderPipeline = async () => {
   const anonymousId = faker.helpers.arrayElement(anonymousIds)
@@ -21,6 +23,8 @@ const createOrderPipeline = async () => {
     return sequelize.transaction(async transaction => {
       await eventHandlers[type](product)
 
+      if (createdAt > now - 1 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
+
       createdAt = getCreatedAt(createdAt)
       type = EVENT_TYPES.PAYMENT_PENDING
       const paymentPending = await OrderEvent.create(
@@ -31,6 +35,8 @@ const createOrderPipeline = async () => {
         },
         { transaction }
       )
+
+      if (createdAt > now - 2 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
 
       if (faker.datatype.boolean(0.007)) {
         createdAt = getCreatedAt(createdAt)
@@ -162,6 +168,8 @@ const createOrderPipeline = async () => {
         )
       }
 
+      if (createdAt > now - 3 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
+
       if (faker.datatype.boolean(0.0057)) {
         createdAt = getCreatedAt(createdAt)
         const shipmentFailed = await OrderEvent.create(
@@ -173,7 +181,7 @@ const createOrderPipeline = async () => {
           { transaction }
         )
       } else {
-        chunkArray(lineItems).forEach(async items => {
+        for (const items of chunkArray(lineItems)) {
           createdAt = getCreatedAt(createdAt)
           const shipment = await OrderEvent.create(
             {
@@ -184,8 +192,10 @@ const createOrderPipeline = async () => {
             },
             { transaction }
           )
-        })
+        }
       }
+
+      if (createdAt > now - 4 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
 
       if (faker.datatype.boolean(0.0043)) {
         createdAt = getCreatedAt(createdAt)
@@ -220,6 +230,8 @@ const createOrderPipeline = async () => {
           )
         }
       }
+
+      if (createdAt > now - 5 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
 
       if (faker.datatype.boolean(0.004)) {
         createdAt = getCreatedAt(createdAt)
@@ -265,6 +277,8 @@ const createOrderPipeline = async () => {
           { transaction }
         )
       }
+
+      if (createdAt > now - 6 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
 
       if (faker.datatype.boolean(0.008)) {
         createdAt = getCreatedAt(createdAt)
@@ -314,6 +328,8 @@ const createOrderPipeline = async () => {
         }
         return { type, createdAt, orderNumber }
       }
+
+      if (createdAt > now - 7 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
 
       if (faker.datatype.boolean(0.011)) {
         createdAt = getCreatedAt(createdAt)
@@ -413,6 +429,8 @@ const createOrderPipeline = async () => {
         )
       }
 
+      if (createdAt > now - 8 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
+
       if (faker.datatype.boolean(0.03)) {
         const tCollectFailed = await OrderEvent.create(
           {
@@ -494,6 +512,8 @@ const createOrderPipeline = async () => {
         }
       }
 
+      if (createdAt > now - 9 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
+
       if (faker.datatype.boolean(0.962)) {
         const emailCollected = await OrderEvent.create(
           {
@@ -552,6 +572,8 @@ const createOrderPipeline = async () => {
         { transaction }
       )
 
+      if (createdAt > now - 10 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
+
       createdAt = getCreatedAt(createdAt)
       type = EVENT_TYPES.PENDING_REFUND
       const pendingRefund = await OrderEvent.create(
@@ -602,6 +624,8 @@ const createOrderPipeline = async () => {
         return { type, createdAt, orderNumber }
       }
 
+      if (createdAt > now - 11 * dayInSec) return { type, createdAt, orderNumber, completedAt: null }
+
       if (faker.datatype.boolean(0.939)) {
         const emailRefundConfirmation = await OrderEvent.create(
           {
@@ -644,8 +668,12 @@ const createOrderPipeline = async () => {
 }
 
 for (let i = (await Order.count()) || 1; i <= ordersCount; i++) {
-  const { type, createdAt, orderNumber } = await createOrderPipeline()
+  const result = await createOrderPipeline()
+  const { type, createdAt, orderNumber } = result
   // finalize order
-  await Order.update({ status: type, updatedAt: createdAt, completedAt: createdAt }, { where: { number: orderNumber } })
+  await Order.update(
+    { status: type, updatedAt: createdAt, completedAt: result.completedAt === null ? null : createdAt },
+    { where: { number: orderNumber } }
+  )
   console.log(i + '/' + ordersCount + ' | ' + type)
 }

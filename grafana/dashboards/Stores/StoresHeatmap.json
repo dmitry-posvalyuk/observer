@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 5,
+  "id": 36,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -29,22 +29,14 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
           "custom": {
             "align": "auto",
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "inspect": false
           },
-          "links": [
-            {
-              "title": "${__data.fields[\"order number\"]}",
-              "url": "/d/d29bc11c-75de-4ee8-ac1e-d0214cae2072/order-review?var-selectedOrderNumber=${__data.fields[\"order number\"]}"
-            }
-          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -52,20 +44,23 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 15,
-        "w": 11,
+        "h": 21,
+        "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 1,
+      "id": 2,
       "options": {
         "cellHeight": "sm",
         "footer": {
@@ -76,7 +71,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.0.1",
       "targets": [
         {
           "datasource": {
@@ -85,8 +80,9 @@
           },
           "editorMode": "code",
           "format": "table",
+          "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  number AS \"order number\",\r\n  status,\r\n  \"createdAt\" AS \"created\",\r\n  \"completedAt\" AS \"completed\"\r\nFROM orders \r\nWHERE \"customerId\" = '$customerId'",
+          "rawSql": "SELECT\r\n  stores.id,\r\n  stores.name,\r\n  stores.address,\r\n  COUNT(stores.id) AS orders,\r\n  location,\r\n  capacity,\r\n  order_limit\r\nFROM orders\r\nJOIN stores ON orders.store_id = stores.id\r\nGROUP BY stores.id\r\nORDER BY stores.id",
           "refId": "A",
           "sql": {
             "columns": [
@@ -107,7 +103,7 @@
           }
         }
       ],
-      "title": "Customer orders",
+      "title": "Stores activity",
       "type": "table"
     },
     {
@@ -134,20 +130,23 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 15,
-        "w": 13,
-        "x": 11,
-        "y": 0
+        "h": 29,
+        "w": 24,
+        "x": 0,
+        "y": 21
       },
-      "id": 2,
+      "id": 1,
       "options": {
         "basemap": {
           "config": {},
@@ -165,44 +164,23 @@
         "layers": [
           {
             "config": {
-              "showLegend": true,
-              "style": {
-                "color": {
-                  "fixed": "dark-green"
-                },
-                "opacity": 0.4,
-                "rotation": {
-                  "fixed": 0,
-                  "max": 360,
-                  "min": -360,
-                  "mode": "mod"
-                },
-                "size": {
-                  "fixed": 5,
-                  "max": 15,
-                  "min": 2
-                },
-                "symbol": {
-                  "fixed": "img/icons/marker/circle.svg",
-                  "mode": "fixed"
-                },
-                "symbolAlign": {
-                  "horizontal": "center",
-                  "vertical": "center"
-                },
-                "textConfig": {
-                  "fontSize": 12,
-                  "offsetX": 0,
-                  "offsetY": 0,
-                  "textAlign": "center",
-                  "textBaseline": "middle"
-                }
+              "blur": 16,
+              "radius": 10,
+              "weight": {
+                "fixed": 1,
+                "max": 1,
+                "min": 0
               }
             },
+            "location": {
+              "latitude": "lat",
+              "longitude": "lon",
+              "mode": "coords"
+            },
             "name": "Stores",
-            "opacity": 0.9,
+            "opacity": 0.8,
             "tooltip": true,
-            "type": "markers"
+            "type": "heatmap"
           }
         ],
         "tooltip": {
@@ -211,12 +189,12 @@
         "view": {
           "allLayers": true,
           "id": "coords",
-          "lat": 54.156742,
-          "lon": -5.506721,
-          "zoom": 4.78
+          "lat": 54.157903,
+          "lon": -3.521466,
+          "zoom": 6.4
         }
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.0.1",
       "targets": [
         {
           "datasource": {
@@ -225,8 +203,9 @@
           },
           "editorMode": "code",
           "format": "table",
+          "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT \r\n  stores.lat,\r\n  stores.lon,\r\n  COUNT(stores.lat) AS \"count\"\r\nFROM orders \r\nLEFT JOIN \"orderEvents\" ON orders.number = \"orderEvents\".\"orderNumber\" AND \"orderEvents\".type = 'created'\r\nLEFT JOIN stores ON stores.id = (payload->>'storeId')::integer\r\nWHERE orders.\"customerId\" = '$customerId' \r\nGROUP BY \r\n  stores.lat,\r\n  stores.lon",
+          "rawSql": "SELECT\r\n  stores.lat,\r\n  stores.lon,\r\n  COUNT(stores.id) AS count\r\nFROM orders\r\nJOIN stores ON orders.store_id = stores.id\r\nWHERE stores.lat IS NOT NULL\r\nGROUP BY \r\n  stores.lat,\r\n  stores.lon",
           "refId": "A",
           "sql": {
             "columns": [
@@ -247,7 +226,7 @@
           }
         }
       ],
-      "title": "Stores",
+      "title": "Stores activity",
       "type": "geomap"
     }
   ],
@@ -255,40 +234,19 @@
   "schemaVersion": 39,
   "tags": [],
   "templating": {
-    "list": [
-      {
-        "current": {
-          "selected": false,
-          "text": "71659606",
-          "value": "71659606"
-        },
-        "datasource": {
-          "type": "grafana-postgresql-datasource",
-          "uid": "e2604fcd-7a2d-471d-9aaf-d7f668646c27"
-        },
-        "definition": "SELECT DISTINCT \"customerId\" FROM orders",
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
-        "name": "customerId",
-        "options": [],
-        "query": "SELECT DISTINCT \"customerId\" FROM orders",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      }
-    ]
+    "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-2y",
     "to": "now"
   },
-  "timepicker": {},
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {
+    "hidden": true
+  },
   "timezone": "",
-  "title": "Customers",
-  "uid": "b4adc323-d29d-40ec-ab47-62ff587e98ec",
-  "version": 12,
+  "title": "Stores Heatmap",
+  "uid": "f5f61e83-17c2-4a0a-93e4-8bb7b9fced34",
+  "version": 1,
   "weekStart": ""
 }
