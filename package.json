@@ -8,7 +8,8 @@
     "start": "npx nodemon --inspect=9123 ./src",
     "env": "docker compose up -d",
     "env:down": "docker compose down",
-    "db:migrate": "node src/db/migrate.js"
+    "db:migrate": "node src/db/migrate.js",
+    "db:generate": "node test/generate.js"
   },
   "dependencies": {
     "dotenv": "^16.4.1",

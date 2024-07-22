@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
   process.env.DB_USER || 'dbuser',
   process.env.DB_PASSWORD || 'dbpassword',
   {
-    host: process.env.DB_HOST || 'db',
+    host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres',
     logging: process.env.NODE_ENV === 'production' ? false : logQuery,
     dialectOptions: {

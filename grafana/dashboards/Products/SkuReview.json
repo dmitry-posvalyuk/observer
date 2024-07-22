@@ -18,8 +18,9 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 10,
+  "id": 23,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -47,7 +48,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -81,6 +83,23 @@
                 ]
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "product key"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "http://localhost:3000/d/c09b1b3c-f6b3-4fdf-b0c6-88d4fdc212eb/product-review?var-selected_key=${__value}"
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -101,7 +120,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -111,7 +130,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \r\n  key,\r\n  name,\r\n  size,\r\n  category,\r\n  section\r\n  color,\r\n  'https://cdn.media.amplience.net/i/primarktest/991102718560_01' AS image_url,\r\n  CONCAT('https://www.primark.com/en-gb/p/', products.slug) as pdp\r\nFROM skus\r\nJOIN products ON products.key = product_key\r\nWHERE sku = $selected_sku\r\nLIMIT 1",
+          "rawSql": "SELECT \r\n  key AS \"product key\",\r\n  name,\r\n  size,\r\n  category,\r\n  section\r\n  color,\r\n  'https://cdn.media.amplience.net/i/primarktest/991102718560_01' AS image_url,\r\n  CONCAT('https://www.primark.com/en-gb/p/', products.slug) as pdp\r\nFROM skus\r\nJOIN products ON products.key = product_key\r\nWHERE sku = $selected_sku\r\nLIMIT 1",
           "refId": "A",
           "sql": {
             "columns": [
@@ -190,7 +209,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -298,7 +318,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -356,15 +377,16 @@
       "type": "timeseries"
     }
   ],
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "381314602",
-          "value": "381314602"
+          "selected": false,
+          "text": "344191823",
+          "value": "344191823"
         },
         "datasource": {
           "type": "grafana-postgresql-datasource",
@@ -390,11 +412,10 @@
     "from": "now-90d",
     "to": "now"
   },
-  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "browser",
   "title": "SKU Review",
   "uid": "bcf69412-fd24-49ec-a081-9de023c4c041",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }

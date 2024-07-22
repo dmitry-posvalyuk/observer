@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 24,
+  "id": 17,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -49,7 +49,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -88,7 +89,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -148,7 +149,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -232,7 +234,7 @@
           "zoom": 5.78
         }
       },
-      "pluginVersion": "11.0.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -290,7 +292,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -324,6 +327,23 @@
                 ]
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sku"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "http://localhost:3000/d/bcf69412-fd24-49ec-a081-9de023c4c041/sku-review?var-selected_sku=${__value}"
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -344,7 +364,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -387,8 +407,8 @@
       {
         "current": {
           "selected": false,
-          "text": "guest-e82534e5-b14f-42fc-a551-6db3bb36f878",
-          "value": "guest-e82534e5-b14f-42fc-a551-6db3bb36f878"
+          "text": "guest-ffec1b0d-e7d0-43a3-b656-9c67087ef982",
+          "value": "guest-ffec1b0d-e7d0-43a3-b656-9c67087ef982"
         },
         "datasource": {
           "type": "grafana-postgresql-datasource",
@@ -413,11 +433,10 @@
     "from": "now-90d",
     "to": "now"
   },
-  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
   "title": "Customer Orders",
   "uid": "b4adc323-d29d-40ec-ab47-62ff587e98ec",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
