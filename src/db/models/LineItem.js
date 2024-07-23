@@ -56,7 +56,17 @@ const LineItem = sequelize.define(
   },
   {
     sequelize,
-    timestamps: false
+    timestamps: false,
+    indexes: [
+      {
+        fields: [
+          {
+            name: 'created_at',
+            order: 'DESC'
+          }
+        ]
+      }
+    ]
   }
 )
 

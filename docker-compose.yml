@@ -13,7 +13,7 @@ services:
       - ./grafana/dashboards:/var/lib/grafana/dashboards
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      # - GF_INSTALL_PLUGINS=volkovlabs-form-panel, https://github.com/CorpGlory/grafana-progress-list/archive/v1.0.9.zip;corpglory-progresslist-panel
+      - GF_INSTALL_PLUGINS=volkovlabs-form-panel
   db:
     image: postgres:alpine
     restart: unless-stopped

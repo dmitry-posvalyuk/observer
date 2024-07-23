@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 36,
+  "id": 10,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -82,7 +82,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  stores.id,\r\n  stores.name,\r\n  stores.address,\r\n  COUNT(stores.id) AS orders,\r\n  location,\r\n  capacity,\r\n  order_limit\r\nFROM orders\r\nJOIN stores ON orders.store_id = stores.id\r\nGROUP BY stores.id\r\nORDER BY stores.id",
+          "rawSql": "SELECT\r\n  stores.id,\r\n  stores.name,\r\n  stores.address,\r\n  COUNT(stores.id) AS orders,\r\n  location,\r\n  capacity,\r\n  order_limit\r\nFROM orders\r\nJOIN stores ON orders.store_id = stores.id\r\nWHERE $__timeFilter(created_at) \r\nGROUP BY stores.id\r\nORDER BY stores.id",
           "refId": "A",
           "sql": {
             "columns": [
@@ -205,7 +205,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  stores.lat,\r\n  stores.lon,\r\n  COUNT(stores.id) AS count\r\nFROM orders\r\nJOIN stores ON orders.store_id = stores.id\r\nWHERE stores.lat IS NOT NULL\r\nGROUP BY \r\n  stores.lat,\r\n  stores.lon",
+          "rawSql": "SELECT\r\n  stores.lat,\r\n  stores.lon,\r\n  COUNT(stores.id) AS count\r\nFROM orders\r\nJOIN stores ON orders.store_id = stores.id\r\nWHERE stores.lat IS NOT NULL\r\n  AND $__timeFilter(created_at) \r\nGROUP BY \r\n  stores.lat,\r\n  stores.lon",
           "refId": "A",
           "sql": {
             "columns": [
@@ -237,12 +237,12 @@
     "list": []
   },
   "time": {
-    "from": "now-2y",
+    "from": "now-12h",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {
-    "hidden": true
+    "hidden": false
   },
   "timezone": "",
   "title": "Stores Heatmap",

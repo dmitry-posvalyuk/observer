@@ -25,17 +25,7 @@ const Sku = sequelize.define(
   },
   {
     sequelize,
-    timestamps: false,
-    indexes: [
-      {
-        fields: [
-          {
-            name: 'created_at',
-            order: 'DESC'
-          }
-        ]
-      }
-    ]
+    timestamps: false
   }
 )
 
