@@ -593,7 +593,7 @@ const createOrderPipeline = async () => {
           {
             orderNumber,
             type,
-            payload: { refunded: [getRefundId(orderNumber)] },
+            payload: { returnId: getRefundId(orderNumber) },
             createdAt
           },
           { transaction }
@@ -643,7 +643,7 @@ const createOrderPipeline = async () => {
         {
           orderNumber,
           type,
-          payload: { refunded: [getRefundId(orderNumber)] },
+          payload: { returnId: getRefundId(orderNumber) },
           createdAt
         },
         { transaction }
