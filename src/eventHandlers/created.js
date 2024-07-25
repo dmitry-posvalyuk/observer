@@ -96,7 +96,7 @@ export default input => {
 
               const productPayload = parseProduct(item, attributes)
               const [product] = await Product.upsert(productPayload, {
-                fields: ['name', 'slug', 'imageUrl', 'category', 'section'],
+                fields: ['name', 'slug', 'imageUrl', 'category', 'section', 'color'],
                 transaction
               })
 
