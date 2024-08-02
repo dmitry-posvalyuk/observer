@@ -20,6 +20,7 @@ const EventType = sequelize.define(
     }
   },
   {
+    sequelize,
     timestamps: false
   }
 )

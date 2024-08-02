@@ -20,7 +20,7 @@ const Sku = sequelize.define(
       }
     },
     size: {
-      type: DataTypes.STRING(8),
+      type: DataTypes.STRING(32),
       allowNull: false
     }
   },

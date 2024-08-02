@@ -76,6 +76,7 @@ export const generateProduct = (createdAt, orderNumber, anonymousId, lineItems) 
       }
     },
     lineItems,
+    cart: { id: faker.string.uuid() },
     custom: {
       fields: {
         collectionDate: collectionDate.toISOString().substring(0, 10),

@@ -9,6 +9,7 @@ const parseOrder = (input, anonymousId, storeId) => ({
   number: input.orderNumber,
   status: events.CREATED,
   anonymousId,
+  cartId: input.cart.id,
   locale: input.locale,
   price: input.totalPrice.centAmount,
   currencyCode: input.totalPrice.currencyCode,

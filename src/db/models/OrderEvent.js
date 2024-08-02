@@ -30,7 +30,18 @@ const OrderEvent = sequelize.define(
     payload: DataTypes.JSON
   },
   {
-    updatedAt: false
+    sequelize,
+    updatedAt: false,
+    indexes: [
+      {
+        fields: [
+          {
+            name: 'created_at',
+            order: 'DESC'
+          }
+        ]
+      }
+    ]
   }
 )
 

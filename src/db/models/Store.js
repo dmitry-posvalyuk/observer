@@ -18,6 +18,7 @@ const Store = sequelize.define(
     orderLimit: DataTypes.SMALLINT
   },
   {
+    sequelize,
     timestamps: false
   }
 )

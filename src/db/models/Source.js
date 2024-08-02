@@ -10,6 +10,7 @@ export default sequelize.define(
     }
   },
   {
+    sequelize,
     timestamps: false
   }
 )

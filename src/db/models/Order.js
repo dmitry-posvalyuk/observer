@@ -29,6 +29,10 @@ const Order = sequelize.define(
         key: 'anonymous_id'
       }
     },
+    cartId: {
+      type: DataTypes.UUID.V4,
+      allowNull: false
+    },
     locale: {
       type: DataTypes.STRING(5),
       allowNull: false,
@@ -72,6 +76,7 @@ const Order = sequelize.define(
     completedAt: DataTypes.DATE
   },
   {
+    sequelize,
     indexes: [
       {
         fields: [
